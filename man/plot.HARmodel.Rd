@@ -16,7 +16,7 @@ Plotting method for HARmodel objects
 }
 \details{
 The plotting method has the following optional parameter:
-\itemize{
+\describe{
 \item{\code{legend.loc}}{ A string denoting the location of the legend passed on to \code{addLegend} of the \pkg{xts} package}
 }
 }

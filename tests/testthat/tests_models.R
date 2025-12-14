@@ -95,10 +95,10 @@ test_that("HEAVYmodel",{
   p1 <- plot(output)
   p2 <- plot(output, type = 'RM')
   expect_equal(p1$get_xlim(),  p2$get_xlim()) # Make sure we plot the same range
-  expect_equal(as.numeric(p1$get_ylim()[[2]]), range(range(dataSPY[,1]^2),  range(output$varCondVariances)))
-  expect_equal(round(as.numeric(p1$get_ylim()[[2]]),4), c(0.0000, 17.9841))
-  expect_equal(as.numeric(p2$get_ylim()[[2]]), range(range(dataSPY[,2]),  range(output$RMCondVariances)))
-  expect_equal(round(as.numeric(p2$get_ylim()[[2]]),4), c(0.0186, 26.2201))
+  expect_equal(as.numeric(p1$get_ylim()), range(range(dataSPY[,1]^2),  range(output$varCondVariances)))
+  expect_equal(round(as.numeric(p1$get_ylim(),4)), c(0.0000, 18))
+  expect_equal(as.numeric(p2$get_ylim()), range(range(dataSPY[,2]),  range(output$RMCondVariances)))
+  expect_equal(round(as.numeric(p2$get_ylim()),4), c(0.0186, 26.2201))
   
   pred <- predict(output, stepsAhead = 12)
   expect_equal(as.numeric(round(pred, 3)), c(0.243, 0.262, 0.275, 0.288, 

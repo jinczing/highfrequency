@@ -1,3 +1,9 @@
+## highfrequency 1.0.2
+
+- Bug fix: spotVol had some clash arguments when specifying m
+- Documentation fix in rThresholdCov
+- Performance improvement suggestion via Github issues #103
+
 ## highfrequency 1.0.1
 
 - New function: rmOutliersTrades

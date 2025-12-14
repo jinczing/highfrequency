@@ -240,17 +240,6 @@ isMultiXts <- function(x, y = NULL) {
 #          as.integer(length(x)/(period*alignPeriod)),
 #          as.integer(length(y)), #na
 #          as.integer(period*alignPeriod)))
-# }
-
-
-#' # Check data:
-#' #' @keywords internal
-#' rdatacheck <- function (rData, multi = FALSE) {
-#'   if ((dim(rData)[2] < 2) & (multi)) {
-#'     stop("Your rData object should have at least 2 columns")
-#'   }
-#' }
-
 
 #' @keywords internal
 RBPCov_bi <- function(ts1, ts2) {
@@ -631,26 +620,26 @@ TSRV <- function(pData , K = 300 , J = 1) {
   TSRV <- adj * ( (1/K) * logreturns_K - ((nbarK/nbarJ) * (1/J) * logreturns_J))
   return(TSRV)
 }
-#' 
-#' #' @keywords internal
-#' zgamma <- function (x, y, gamma_power) {
-#'   if (x^2 < y) {
-#'     out <- abs(x)^gamma_power
-#'   } else {
-#'     if (gamma_power == 1) {
-#'       out <- 1.094 * sqrt(y)
-#'     }
-#'     if (gamma_power == 2) {
-#'       out <- 1.207 * y
-#'     }
-#'     if (gamma_power == 4/3) {
-#'       out <- 1.129 * y^(2/3)
-#'     }
-#'   }
-#'   
-#'   return(out)
-#' }
-#' 
+
+# keywords internal
+# zgamma <- function (x, y, gamma_power) {
+#   if (x^2 < y) {
+#     out <- abs(x)^gamma_power
+#   } else {
+#     if (gamma_power == 1) {
+#       out <- 1.094 * sqrt(y)
+#     }
+#     if (gamma_power == 2) {
+#       out <- 1.207 * y
+#     }
+#     if (gamma_power == 4/3) {
+#       out <- 1.129 * y^(2/3)
+#     }
+#   }
+#   
+#   return(out)
+# }
+#
 
 
 

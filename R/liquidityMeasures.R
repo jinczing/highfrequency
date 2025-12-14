@@ -17,7 +17,7 @@
 #' This information can be passed in a column \code{DIRECTION} this column must only have 1 or -1 as values.
 #' 
 #' The respective liquidity measures are defined as follows:
-#'   \itemize{
+#'   \describe{
 #'     \item{effectiveSpread}{
 #'     \deqn{
 #'      \mbox{effective spread}_t =  2*D_t*(\mbox{PRICE}_{t} - \frac{(\mbox{BID}_{t}+\mbox{OFR}_{t})}{2}),

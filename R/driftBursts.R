@@ -279,7 +279,7 @@ driftBursts <- function(pData, testTimes = seq(34260, 57600, 60),
 #' @param ... optional arguments, see details
 #' 
 #' @details The plotting method has the following optional parameters:
-#' \itemize{
+#' \describe{
 #' \item{\code{pData}}{ A \code{data.table} or an \code{xts} object, containing the prices and timestamps of the data used to calculate the test statistic.
 #' If specified, and \code{which = "tStat"}, the price will be shown on the right y-axis along with the test statistic}
 #' \item{\code{which}}{ A string denoting which of four plots to make. \code{"tStat"} denotes plotting the test statistic. \code{"sigma"} denotes plotting the
@@ -436,7 +436,7 @@ plot.DBH <- function(x, ...){
 #' @param ... optional arguments, see details
 #' @details 
 #' The print method has the following optional parameters:
-#' \itemize{
+#' \describe{
 #' \item{\code{criticalValue}}{ A numeric denoting a custom critical value of the test.}
 #' \item{\code{alpha}}{ A numeric denoting the confidence level of the test. The alpha value is passed on to \code{\link{getCriticalValues}}.
 #' The default value is 0.95}

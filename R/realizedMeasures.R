@@ -2312,7 +2312,7 @@ rSVar <- function(rData, alignBy = NULL, alignPeriod = NULL, makeReturns = FALSE
 #' \deqn{
 #' \mbox{thresholdcov}[k,q]_{t} = \sum_{i=1}^{M} r_{(k)t,i} 1_{\{r_{(k)t,i}^2 \leq TR_{M}\}}  \ \ r_{(q)t,i} 1_{\{r_{(q)t,i}^2 \leq TR_{M}\}},
 #' }
-#' with the threshold value \eqn{TR_{M}} set to \eqn{9 \Delta^{-1}} times the daily realized bi-power variation of asset \eqn{k},
+#' with the threshold value \eqn{TR_{M}} set to \eqn{3 \Delta^{0.49}} times the daily realized bi-power variation of asset \eqn{k},
 #' as suggested in Jacod and Todorov (2009).
 #'
 #' @param rData an \code{xts} or \code{data.table} object containing returns or prices, possibly for multiple assets over multiple days.
@@ -2325,8 +2325,11 @@ rSVar <- function(rData, alignBy = NULL, alignPeriod = NULL, makeReturns = FALSE
 #' \code{FALSE} by default.
 #' @param ... used internally, do not change.
 #' 
-#' @return in case the input is and contains data from one day, an \eqn{N \times N} matrix is returned. If the data is a univariate \code{xts} object with multiple days, an \code{xts} is returned.
-#' If the data is multivariate and contains multiple days (\code{xts} or \code{data.table}), the function returns a list containing \eqn{N \times N} matrices. Each item in the list has a name which corresponds to the date for the matrix.
+#' @return in case the input is and contains data from one day, an \eqn{N \times N} matrix is returned. 
+#' If the data is a univariate \code{xts} object with multiple days, an \code{xts} is returned.
+#' If the data is multivariate and contains multiple days (\code{xts} or \code{data.table}), 
+#' the function returns a list containing \eqn{N \times N} matrices. 
+#' Each item in the list has a name which corresponds to the date for the matrix.
 #'
 #' @references
 #' Barndorff-Nielsen, O. and Shephard, N. (2004). Measuring the impact of jumps in multivariate price processes using bipower covariation. Discussion paper, Nuffield College, Oxford University.
@@ -4190,8 +4193,8 @@ rBACov <- function(pData, shares, outstanding, nonEquity, ETFNAME = "ETF",
   for (i in 1:length(pData)) {
     setnames(pData[[i]], new= c("DT", nm[i]))
   }
-  # backup <- Reduce(function(x,y) merge.data.table(x, y, all = TRUE, on = "DT"), pData[which(names(pData) != ETFNAME)])
-  pData <- Reduce(function(x,y) merge.data.table(x, y, all = TRUE, on = "DT"), pData)
+  # backup <- Reduce(function(x,y) merge.data.table(x, y, all = TRUE, by = "DT"), pData[which(names(pData) != ETFNAME)])
+  pData <- Reduce(function(x,y) merge.data.table(x, y, all = TRUE, by = "DT"), pData)
   setkey(pData, "DT")
   # setkey(backup, "DT")
   

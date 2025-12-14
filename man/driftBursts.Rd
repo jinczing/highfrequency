@@ -95,7 +95,7 @@ The lags from the Newey-West algorithm is increased by \code{2 * (preAveage-1)} 
 The maximum of 20 lags is also increased by this factor for the same reason.
 }
 \examples{
-\dontshow{if (!grepl("debian", sessionInfo()["platform"], fixed = FALSE)) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+\dontshow{if (!grepl("debian", sessionInfo()["platform"], fixed = FALSE)) withAutoprint(\{ # examplesIf}
 \dontshow{data.table::setDTthreads(2)}
 # Usage with data.table object
 dat <- sampleTData[as.Date(DT) == "2018-01-02"]

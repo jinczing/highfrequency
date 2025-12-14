@@ -16,7 +16,7 @@ Plotting method for \code{DBH} objects
 }
 \details{
 The plotting method has the following optional parameters:
-\itemize{
+\describe{
 \item{\code{pData}}{ A \code{data.table} or an \code{xts} object, containing the prices and timestamps of the data used to calculate the test statistic.
 If specified, and \code{which = "tStat"}, the price will be shown on the right y-axis along with the test statistic}
 \item{\code{which}}{ A string denoting which of four plots to make. \code{"tStat"} denotes plotting the test statistic. \code{"sigma"} denotes plotting the
@@ -25,7 +25,7 @@ both the drift and volatility processes are plotted. CaPiTAlizAtIOn doesn't matt
 }
 }
 \examples{
-\dontshow{if (!grepl("debian", sessionInfo()["platform"], fixed = FALSE)) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+\dontshow{if (!grepl("debian", sessionInfo()["platform"], fixed = FALSE)) withAutoprint(\{ # examplesIf}
 \dontshow{data.table::setDTthreads(2)}
 # Testing every 60 seconds after 09:15:00
 DBH <- driftBursts(sampleTDataEurope, testTimes = seq(32400 + 900, 63000, 60), preAverage = 2, 

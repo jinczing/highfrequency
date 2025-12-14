@@ -50,7 +50,7 @@ the outer product of gradients.
 Note that we always demean the returns in the data input as we don't include a constant in the mean equation.
 }
 \examples{
-\dontshow{if (!grepl("debian", sessionInfo()["platform"], fixed = TRUE)) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+\dontshow{if (!grepl("debian", sessionInfo()["platform"], fixed = TRUE)) withAutoprint(\{ # examplesIf}
 
 # Calculate returns in percentages
 logReturns <- 100 * makeReturns(SPYRM$CLOSE)[-1]

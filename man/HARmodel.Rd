@@ -97,7 +97,7 @@ For other specifications, please refer to the cited papers.
 The standard errors reporting in the \code{print} and \code{summary} methods are Newey-West standard errors calculated with the \pkg{sandwich} package.
 }
 \examples{
-\dontshow{if (!grepl("debian", sessionInfo()["platform"], fixed = TRUE)) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+\dontshow{if (!grepl("debian", sessionInfo()["platform"], fixed = TRUE)) withAutoprint(\{ # examplesIf}
 \dontshow{data.table::setDTthreads(2)}
 # Example 1: HAR
 # Forecasting daily Realized volatility for the S&P 500 using the basic HARmodel: HAR

@@ -16,7 +16,7 @@ Predict method for objects of type \code{HARmodel}
 }
 \details{
 The print method has the following optional parameters:
-\itemize{
+\describe{
 \item{\code{newdata}}{ new data to use for forecasting}
 \item{\code{warnings}}{ A logical denoting whether to display warnings, detault is \code{TRUE}}
 \item{\code{backtransform}}{ A string. If the model is estimated with transformation this parameter can be set to transform the prediction back into variance
