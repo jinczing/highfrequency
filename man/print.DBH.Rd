@@ -16,14 +16,14 @@ Printing method for \code{DBH} objects
 }
 \details{
 The print method has the following optional parameters:
-\itemize{
+\describe{
 \item{\code{criticalValue}}{ A numeric denoting a custom critical value of the test.}
 \item{\code{alpha}}{ A numeric denoting the confidence level of the test. The alpha value is passed on to \code{\link{getCriticalValues}}.
 The default value is 0.95}
 }
 }
 \examples{
-\dontshow{if (!grepl("debian", sessionInfo()["platform"], fixed = FALSE)) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+\dontshow{if (!grepl("debian", sessionInfo()["platform"], fixed = FALSE)) withAutoprint(\{ # examplesIf}
 \dontrun{
 DBH <- driftBursts(sampleTDataEurope, testTimes = seq(32400 + 900, 63000, 300), preAverage = 2, 
                    ACLag = -1L, meanBandwidth = 300L, varianceBandwidth = 900L)

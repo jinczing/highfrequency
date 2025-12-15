@@ -64,14 +64,14 @@ Estimates the spot drift by applying a rolling mean over returns.
 }
 where \eqn{k} is the argument \code{periods}.
 Parameters:
-\itemize{
+\describe{
    \item{\code{periods}}{ how big the window for the estimation should be. The estimator will have \code{periods} \code{NA}s at the beginning of each trading day.}
    \item{\code{align}}{ alignment method for returns. Defaults to \code{"left"}, which includes only past data, but other choices, \code{"center"} and \code{"right"} are available.
     Warning: These values includes future data.}
 }
 Outputs:
-\itemize{
- \item{\code{mu} a matrix containing the spot drift estimates}
+\describe{
+ \item{\code{mu}}{a matrix containing the spot drift estimates}
 }
   
 \strong{Rolling window median (\code{"median"})}
@@ -82,14 +82,14 @@ Estimates the spot drift by applying a rolling mean over returns.
 }
 where \eqn{k} is the argument \code{periods}.
 Parameters:
- \itemize{
+ \describe{
    \item{\code{periods}}{ How big the window for the estimation should be. The estimator will have \code{periods} \code{NA}s at the beginning of each trading day.}
    \item{\code{align}}{ Alignment method for returns. Defaults to \code{"left"}, which includes only past data, but other choices, \code{"center"} and \code{"right"} are available.
     These values includes FUTURE DATA, so beware!}
 }
 Outputs:
-\itemize{
- \item{\code{mu} a matrix containing the spot drift estimates}
+\describe{
+ \item{\code{mu}}{a matrix containing the spot drift estimates}
 }
 
 \strong{kernel spot drift estimator (\code{"kernel"})}
@@ -114,13 +114,13 @@ The spot drift estimator is then:
     \hat{\bar{\mu}}_{t}^{n} = \sum_{i=1}^{n-k_{n}+2}K\left(\frac{t_{i-1}-t}{h_{n}}\right)\Delta_{i-1}^{n}\overline{Y},
 }
 The kernel estimation method has the following parameters:
- \itemize{
+ \describe{
    \item{\code{preAverage}}{ a positive \code{integer} denoting the length of pre-averaging window for the log-prices. Default is 5}
    \item{\code{meanBandwidth}}{ an \code{integer} denoting the bandwidth for the left-sided exponential kernel for the mean. Default is \code{300L}}
 }
 Outputs:
-\itemize{
- \item{\code{mu} a matrix containing the spot drift estimates}
+\describe{
+ \item{\code{mu}}{a matrix containing the spot drift estimates}
 }
 }
 \examples{

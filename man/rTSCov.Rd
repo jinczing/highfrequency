@@ -89,7 +89,7 @@ By setting the argument makePsd = TRUE, the function \code{\link{makePsd}} is us
 matrix. This function replaces the negative eigenvalues with zeroes.
 }
 \examples{
-\dontshow{if (!grepl("debian", sessionInfo()["platform"], fixed = TRUE)) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+\dontshow{if (!grepl("debian", sessionInfo()["platform"], fixed = TRUE)) withAutoprint(\{ # examplesIf}
 # Robust Realized two timescales Variance/Covariance
 # Multivariate:
 \dontrun{

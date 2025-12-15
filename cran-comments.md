@@ -1,6 +1,5 @@
 ## Test environments
-* local OS X install, R 4.3.1
-* linux and windows server via devtools::check_rhub()
+* local OS X install, R 4.4.1
 * windows via devtools::check_win_devel()
 
 ## R CMD check results

@@ -35,7 +35,7 @@ Calculate the realized quad-power variation, defined in Andersen et al. (2012).
  }
 }
 \examples{
-\dontshow{if (!grepl("debian", sessionInfo()["platform"], fixed = TRUE)) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+\dontshow{if (!grepl("debian", sessionInfo()["platform"], fixed = TRUE)) withAutoprint(\{ # examplesIf}
 qpv <- rQPVar(rData= sampleTData[, list(DT, PRICE)], alignBy= "minutes",
               alignPeriod =5, makeReturns= TRUE)
 qpv

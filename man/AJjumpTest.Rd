@@ -104,7 +104,7 @@ Ait-Sahalia and Jacod (2009) define a new variable which converges to 1 in the p
 or to another deterministic and known number in the absence of jumps (Theodosiou and Zikes, 2009).
 }
 \examples{
-\dontshow{if (!grepl("debian", sessionInfo()["platform"], fixed = TRUE)) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+\dontshow{if (!grepl("debian", sessionInfo()["platform"], fixed = TRUE)) withAutoprint(\{ # examplesIf}
 \dontshow{data.table::setDTthreads(2)}
 jt <- AJjumpTest(sampleTData[, list(DT, PRICE)], p = 2, k = 3, 
                  alignBy = "seconds", alignPeriod = 5, makeReturns = TRUE)

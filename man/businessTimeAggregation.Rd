@@ -36,7 +36,7 @@ Time series aggregation based on `business time` statistics. Instead of equidist
 For example when sampling based on volume, business time aggregation will result in a time series that has an equal amount of volume between each observation (if possible).
 }
 \examples{
-\dontshow{if (!grepl("debian", sessionInfo()["platform"], fixed = FALSE)) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+\dontshow{if (!grepl("debian", sessionInfo()["platform"], fixed = FALSE)) withAutoprint(\{ # examplesIf}
 \dontshow{data.table::setDTthreads(2)}
 
 pData <- sampleTData[,list(DT, PRICE, SIZE)]

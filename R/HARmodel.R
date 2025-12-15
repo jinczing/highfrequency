@@ -517,7 +517,7 @@ HARmodel <- function(data, periods = c(1, 5, 22), periodsJ = c(1, 5, 22), period
 #' @param x an object of class \code{HARmodel}
 #' @param ... extra arguments, see details
 #' @details The plotting method has the following optional parameter:
-#' \itemize{
+#' \describe{
 #' \item{\code{legend.loc}}{ A string denoting the location of the legend passed on to \code{addLegend} of the \pkg{xts} package}
 #' }
 #' 
@@ -564,7 +564,7 @@ plot.HARmodel <- function(x, ...){
 #' @param ... extra arguments. See details
 #' @details
 #' The print method has the following optional parameters:
-#' \itemize{
+#' \describe{
 #' \item{\code{newdata}}{ new data to use for forecasting}
 #' \item{\code{warnings}}{ A logical denoting whether to display warnings, detault is \code{TRUE}}
 #' \item{\code{backtransform}}{ A string. If the model is estimated with transformation this parameter can be set to transform the prediction back into variance

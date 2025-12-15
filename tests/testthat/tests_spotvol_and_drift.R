@@ -70,7 +70,7 @@ test_that("spotVol", {
   )
   p1 <- plot(spot$periodic)
   expect_equal(p1$get_xlim(), c(996917700, 996940800))
-  expect_equal(as.numeric(p1$get_ylim()[[2]]), c(0.710298272355463, 1.618458734575640))
+  expect_equal(as.numeric(p1$get_ylim()), c(0.710298272355463, 1.618458734575640))
   
   
 

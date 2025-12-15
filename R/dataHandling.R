@@ -1157,10 +1157,15 @@ mergeQuotesSameTimestamp <- function(qData, selection = "median") {
   if (selection == "weighted.average") {
     qData_size <- qData[, lapply(.SD, sum), by = list(DT, SYMBOL), .SDcols = c("BIDSIZ", "OFRSIZ")]
     qData[, `:=`(BIDSIZ = as.numeric(BIDSIZ), OFRSIZ = as.numeric(OFRSIZ))]
-    qData <- qData[, `:=` (BIDSIZ = BIDSIZ / sum(BIDSIZ), OFRSIZ = OFRSIZ / sum(OFRSIZ)), by = list(DT, SYMBOL)][
-      , `:=` (BID = sum(BID * BIDSIZ), OFR = sum(OFR * OFRSIZ)), by = list(DT, SYMBOL)][
-        , -c("BIDSIZ", "OFRSIZ")][
-        , lapply(.SD, unique), by = list(DT, SYMBOL), .SDcols = c("BID", "OFR")]
+    # qData <- qData[, `:=` (BIDSIZ = BIDSIZ / sum(BIDSIZ), OFRSIZ = OFRSIZ / sum(OFRSIZ)), by = list(DT, SYMBOL)][
+    #   , `:=` (BID = sum(BID * BIDSIZ), OFR = sum(OFR * OFRSIZ)), by = list(DT, SYMBOL)][
+    #     , -c("BIDSIZ", "OFRSIZ")][
+    #     , lapply(.SD, unique), by = list(DT, SYMBOL), .SDcols = c("BID", "OFR")]
+    qData <- qData[, `:=`(BID = sum(BID * BIDSIZ) / sum(BIDSIZ), 
+                          OFR = sum(OFR * OFRSIZ) / sum(OFRSIZ)), 
+                   by = list(DT, SYMBOL)
+                   ][, -c("BIDSIZ", "OFRSIZ")
+                     ][, lapply(.SD, unique), by = list(DT, SYMBOL), .SDcols = c("BID", "OFR")]
     qData <- merge(qData, qData_size, by = c("DT", "SYMBOL"))
   }
   
@@ -2693,7 +2698,7 @@ refreshTime <- function (pData, sort = FALSE, criterion = "squared duration") {
     # # 
     # # # pData <- Reduce(mergeOverload, pData)
     # # 
-    pData <- Reduce(function(x,y) merge.data.table(x, y, all = TRUE, on = "DT"), pData)
+    pData <- Reduce(function(x,y) merge.data.table(x, y, all = TRUE, by = "DT"), pData)
     
     # For if the copying is needed
     # pData <- refreshTimeMatching(as.matrix(pData[,-"DT"]), pData$DT)

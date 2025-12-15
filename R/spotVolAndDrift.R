@@ -36,14 +36,14 @@
 #' }
 #' where \eqn{k} is the argument \code{periods}.
 #' Parameters:
-#' \itemize{
+#' \describe{
 #'    \item{\code{periods}}{ how big the window for the estimation should be. The estimator will have \code{periods} \code{NA}s at the beginning of each trading day.}
 #'    \item{\code{align}}{ alignment method for returns. Defaults to \code{"left"}, which includes only past data, but other choices, \code{"center"} and \code{"right"} are available.
 #'     Warning: These values includes future data.}
 #' }
 #' Outputs:
-#' \itemize{
-#'  \item{\code{mu} a matrix containing the spot drift estimates}
+#' \describe{
+#'  \item{\code{mu}}{a matrix containing the spot drift estimates}
 #' }
 #'   
 #' \strong{Rolling window median (\code{"median"})}
@@ -54,14 +54,14 @@
 #' }
 #' where \eqn{k} is the argument \code{periods}.
 #' Parameters:
-#'  \itemize{
+#'  \describe{
 #'    \item{\code{periods}}{ How big the window for the estimation should be. The estimator will have \code{periods} \code{NA}s at the beginning of each trading day.}
 #'    \item{\code{align}}{ Alignment method for returns. Defaults to \code{"left"}, which includes only past data, but other choices, \code{"center"} and \code{"right"} are available.
 #'     These values includes FUTURE DATA, so beware!}
 #' }
 #' Outputs:
-#' \itemize{
-#'  \item{\code{mu} a matrix containing the spot drift estimates}
+#' \describe{
+#'  \item{\code{mu}}{a matrix containing the spot drift estimates}
 #' }
 #' 
 #' \strong{kernel spot drift estimator (\code{"kernel"})}
@@ -87,13 +87,13 @@
 #'     \hat{\bar{\mu}}_{t}^{n} = \sum_{i=1}^{n-k_{n}+2}K\left(\frac{t_{i-1}-t}{h_{n}}\right)\Delta_{i-1}^{n}\overline{Y},
 #' }
 #' The kernel estimation method has the following parameters:
-#'  \itemize{
+#'  \describe{
 #'    \item{\code{preAverage}}{ a positive \code{integer} denoting the length of pre-averaging window for the log-prices. Default is 5}
 #'    \item{\code{meanBandwidth}}{ an \code{integer} denoting the bandwidth for the left-sided exponential kernel for the mean. Default is \code{300L}}
 #' }
 #' Outputs:
-#' \itemize{
-#'  \item{\code{mu} a matrix containing the spot drift estimates}
+#' \describe{
+#'  \item{\code{mu}}{a matrix containing the spot drift estimates}
 #' }
 #' @references 
 #' Christensen, K., Oomen, R., and Reno, R. (2020) The drift burst hypothesis. Journal of Econometrics. Forthcoming.
@@ -197,51 +197,48 @@ spotDrift <- function(data, method = "mean", alignBy = "minutes", alignPeriod = 
 #' @param tz fallback time zone used in case we we are unable to identify the timezone of the data, by default: \code{tz = NULL}. 
 #' We attempt to extract the timezone from the DT column (or index) of the data, which may fail. 
 #' In case of failure we use \code{tz} if specified, and if it is not specified, we use \code{"UTC"}
+#' @param m method-specific tuning parameters for the piecewise constant
+#' volatility estimator (\code{method = "piecewise"}). These are forwarded through
+#' to the underlying \code{piecewise()} estimator via \code{...}. They are kept as
+#' explicit arguments for backwards compatibility with earlier versions of
+#' the package.
+#' @param n see the description of parameter \code{m}
+#' @param online see the description of parameter \code{m}
 #' @param ... method-specific parameters (see `Details' below).
 #'
 #' @return A \code{spotVol} object, which is a list containing one or more of the
 #' following outputs, depending on the method used:
 #'
-#' \itemize{ 
-#' \item \code{spot}
-#'
-#' An \code{xts} or \code{matrix} object (depending on the input) containing
+#' \describe{ 
+#' \item{\code{spot}}{ An \code{xts} or \code{matrix} object 
+#' (depending on the input) containing
 #' spot volatility estimates \eqn{\sigma_{t,i}}, reported for each interval
 #' \eqn{i} between \code{marketOpen} and \code{marketClose} for every day
 #' \eqn{t} in \code{data}. The length of the intervals is specified by \code{alignPeriod}
-#' and \code{alignBy}. Methods that provide this output: All.
-#'
-#' \code{daily}
+#' and \code{alignBy}. Methods that provide this output: All.}
+#' \item{\code{daily}}{
 #' An \code{xts} or \code{numeric} object (depending on the input) containing
 #' estimates of the daily volatility levels for each day \eqn{t} in \code{data},
 #' if the used method decomposed spot volatility into a daily and an intraday
-#' component. Methods that provide this output: \code{"detPer"}.
-#'
-#' \item \code{periodic}
-#'
+#' component. Methods that provide this output: \code{"detPer"}.}
+#' \item{\code{periodic}}{
 #' An \code{xts} or \code{numeric} object (depending on the input) containing
 #' estimates of the intraday periodicity factor for each day interval \eqn{i}
 #' between \code{marketOpen} and \code{marketClose}, if the spot volatility was
 #' decomposed into a daily and an intraday component. If the output is in
 #' \code{xts} format, this periodicity factor will be dated to the first day of
 #' the input data, but it is identical for each day in the sample. Methods that
-#' provide this output: \code{"detPer"}.
-#'
-#' \item \code{par}
-#'
+#' provide this output: \code{"detPer"}.}
+#' \item{\code{par}}{
 #' A named list containing parameter estimates, for methods that estimate one
 #' or more parameters. Methods that provide this output:
-#' \code{"stochper", "kernel"}.
-#'
-#' \item \code{cp}
-#'
+#' \code{"stochper", "kernel"}.}
+#' \item{\code{cp}}{
 #' A vector containing the change points in the volatility, i.e. the observation
 #' indices after which the volatility level changed, according to the applied
 #' tests. The vector starts with a 0. Methods that provide this output:
-#'  \code{"piecewise"}.
-#'
-#' \item \code{ugarchfit}
-#'
+#'  \code{"piecewise"}.}
+#' \item{\code{ugarchfit}}{
 #' A \code{ugarchfit} object, as used by the \code{rugarch}
 #' package, containing all output from fitting the GARCH model to the data.
 #' Methods that provide this output: \code{"garch"}.
@@ -255,7 +252,7 @@ spotDrift <- function(data, method = "mean", alignBy = "minutes", alignPeriod = 
 #' The input can consist of price data or return data, either tick by tick or
 #' sampled at set intervals. The data will be converted to equispaced
 #' high-frequency returns \eqn{r_{t,i}} (read: the \eqn{i}-th return on day
-#'                                      \eqn{t}).
+#'                                      \eqn{t}).}
 #' }
 #' @details The following estimation methods can be specified in \code{method}:
 #'
@@ -405,22 +402,22 @@ spotDrift <- function(data, method = "mean", alignBy = "minutes", alignPeriod = 
 #'
 #' Parameters:
 #' \itemize{
-#' \item{\code{type}}{ String specifying the type of kernel to be used. Options
+#' \item{\code{type} String specifying the type of kernel to be used. Options
 #' include \code{"gaussian", "epanechnikov", "beta"}. Default = \code{"gaussian"}.}
-#' \item{\code{h}}{ Scalar or vector specifying bandwidth(s) to be used in kernel.
+#' \item{\code{h} Scalar or vector specifying bandwidth(s) to be used in kernel.
 #' If \code{h} is a scalar, it will be assumed equal throughout the sample. If
 #' it is a vector, it should contain bandwidths for each day. If left empty,
 #' it will be estimated. Default = \code{NULL}.}
-#' \item{\code{est}}{ String specifying the bandwidth estimation method. Possible
+#' \item{\code{est} String specifying the bandwidth estimation method. Possible
 #' values include \code{"cv", "quarticity"}. Method \code{"cv"} equals
 #' cross-validation, which chooses the bandwidth that minimizes the Integrated
 #' Square Error. \code{"quarticity"} multiplies the simple plug-in estimator
 #' by a factor based on the daily quarticity of the returns. \code{est} is
 #' obsolete if \code{h} has already been specified by the user.
 #' \code{"cv"} by default.}
-#' \item{\code{lower}}{ Lower bound to be used in bandwidth optimization routine,
+#' \item{\code{lower} Lower bound to be used in bandwidth optimization routine,
 #' when using cross-validation method. Default is \eqn{0.1n^{-0.2}}.}
-#' \item{\code{upper}}{ Upper bound to be used in bandwidth optimization routine,
+#' \item{\code{upper} Upper bound to be used in bandwidth optimization routine,
 #' when using cross-validation method. Default is \eqn{n^{-0.2}}.}
 #' }
 #'
@@ -461,21 +458,21 @@ spotDrift <- function(data, method = "mean", alignBy = "minutes", alignPeriod = 
 #' \strong{Piecewise constant volatility (\code{"piecewise"})}
 #'
 #' Parameters:
-#' \itemize{
-#' \item{\code{type} string specifying the type of test to be used. Options
+#' \describe{
+#' \item{\code{type}}{ string specifying the type of test to be used. Options
 #' include \code{"MDa", "MDb", "DM"}. See Fried (2012) for details. Default = \code{"MDa"}.}
-#' \item{\code{m} number of observations to include in reference window.
+#' \item{\code{m}}{number of observations to include in reference window.
 #' Default = \code{40}.}
-#' \item{\code{n} number of observations to include in test window.
+#' \item{\code{n}}{number of observations to include in test window.
 #' Default = \code{20}.}
-#' \item{\code{alpha} significance level to be used in tests. Note that the test
+#' \item{\code{alpha}}{ significance level to be used in tests. Note that the test
 #' will be executed many times (roughly equal to the total number of
 #' observations), so it is advised to use a small value for \code{alpha}, to
 #' avoid a lot of false positives. Default = \code{0.005}.}
-#' \item{\code{volEst} string specifying the realized volatility estimator to be
+#' \item{\code{volEst}}{ string specifying the realized volatility estimator to be
 #' used in local windows. Possible values are \code{"rBPCov", "rRVar", "rMedRVar"}.
 #' Default = \code{"rBPCov"}.}
-#' \item{\code{online} boolean indicating whether estimations at a certain point
+#' \item{\code{online}}{ boolean indicating whether estimations at a certain point
 #' \eqn{t} should be done online (using only information available at
 #' \eqn{t-1}), or ex post (using all observations between two change points).
 #' Default = \code{TRUE}.}
@@ -653,10 +650,19 @@ spotDrift <- function(data, method = "mean", alignBy = "minutes", alignPeriod = 
 #' Kristensen, D. (2010). Nonparametric filtering of the realized spot volatility: A kernel-based approach. \emph{Econometric Theory}, 26, 60-93.
 #'
 #' Taylor, S. J. and Xu, X. (1997). The incremental volatility information in one million foreign exchange quotations. \emph{Journal of Empirical Finance}, 4, 317-340.
+#'
 #' @export
-spotVol <- function(data, method = "detPer", alignBy = "minutes", alignPeriod = 5,
-                      marketOpen = "09:30:00", marketClose = "16:00:00",
-                      tz = "GMT", ...) {
+spotVol <- function(data,
+                    method      = "detPer",
+                    alignBy     = "minutes",
+                    alignPeriod = 5,
+                    marketOpen  = "09:30:00",
+                    marketClose = "16:00:00",
+                    tz          = "GMT",
+                    m           = NULL,
+                    n           = NULL,
+                    online      = NULL,
+                    ...) {
   
   DT <- PRICE <- DATE <- RETURN <- NULL
   
@@ -714,6 +720,18 @@ spotVol <- function(data, method = "detPer", alignBy = "minutes", alignPeriod = 
     }
   }
   options <- list(...)
+
+  if (method == "piecewise") {
+    if (!is.null(m)) {
+      options$m <- m
+    }
+    if (!is.null(n)) {
+      options$n <- n
+    }
+    if (!is.null(online)) {
+      options$online <- online
+    }
+  }
   out <- switch(method,
                 detPer = detPer(mR, rData = rData, options = options),
                 stochPer = stochPer(mR, rData = rData, options = options),

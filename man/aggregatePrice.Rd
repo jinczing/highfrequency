@@ -52,7 +52,7 @@ For example, if 14 observations are made on one day, and these are 1, 2, 3, ... 
 Then, with \code{alignBy = "ticks"} and \code{alignPeriod = 3}, the output will be 1, 4, 7, 10, 13, 14.
 }
 \examples{
-\dontshow{if (!grepl("debian", sessionInfo()["platform"], fixed = FALSE)) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+\dontshow{if (!grepl("debian", sessionInfo()["platform"], fixed = FALSE)) withAutoprint(\{ # examplesIf}
 # Aggregate price data to the 30-second frequency
 aggregatePrice(sampleTData, alignBy = "secs", alignPeriod = 30)
 
