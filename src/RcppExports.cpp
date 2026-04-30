@@ -170,14 +170,14 @@ END_RCPP
 // overlap
 bool overlap(double min1, double max1, double min2, double max2);
 RcppExport SEXP _highfrequency_overlap(SEXP min1SEXP, SEXP max1SEXP, SEXP min2SEXP, SEXP max2SEXP) {
-BEGIN_RCPP
+BEGIN_RCPP // helps error translation
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< double >::type min1(min1SEXP);
+    Rcpp::traits::input_parameter< double >::type min1(min1SEXP); // Rn to cpp
     Rcpp::traits::input_parameter< double >::type max1(max1SEXP);
     Rcpp::traits::input_parameter< double >::type min2(min2SEXP);
     Rcpp::traits::input_parameter< double >::type max2(max2SEXP);
-    rcpp_result_gen = Rcpp::wrap(overlap(min1, max1, min2, max2));
+    rcpp_result_gen = Rcpp::wrap(overlap(min1, max1, min2, max2)); // cpp to Rn
     return rcpp_result_gen;
 END_RCPP
 }
